@@ -277,7 +277,7 @@ describe("AutoCompleteAdapter", () => {
     it("respects onDidConvertCompletionItem", async () => {
       sinon.stub(server.connection, "completion").resolves([createCompletionItem("label")])
       const results = await autoCompleteAdapter.getSuggestions(server, createRequest({}), (c, a, r) => {
-        ;(a as ac.TextSuggestion).text = c.label + " ok"
+        ;(a as ac.TextSuggestion).text = `${c.label} ok`
         a.displayText = r.scopeDescriptor.getScopesArray()[0]
       })
 

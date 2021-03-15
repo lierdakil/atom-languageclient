@@ -516,7 +516,7 @@ export default class AutoLanguageClient {
   public provideAutocomplete(): ac.AutocompleteProvider {
     return {
       selector: this.getGrammarScopes()
-        .map((g) => (g.includes(".") ? "." + g : g))
+        .map((g) => (g.includes(".") ? `.${g}` : g))
         .join(", "),
       inclusionPriority: 1,
       suggestionPriority: 2,
