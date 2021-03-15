@@ -90,7 +90,7 @@ export default class ApplyEditAdapter {
     const startRow = edit.oldRange.start.row
     const startCol = edit.oldRange.start.column
     const lineLength = buffer.lineLengthForRow(startRow)
-    if (lineLength == null || startCol > lineLength) {
+    if (startCol > lineLength) {
       throw Error(`Out of range edit on ${path}:${startRow + 1}:${startCol + 1}`)
     }
   }
