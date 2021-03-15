@@ -46,14 +46,14 @@ export default class DefinitionAdapter {
     const definitionLocations = DefinitionAdapter.normalizeLocations(
       await connection.gotoDefinition(documentPositionParams)
     )
-    if (definitionLocations == null || definitionLocations.length === 0) {
+    if (definitionLocations === null || definitionLocations.length === 0) {
       return null
     }
 
     let queryRange
     if (serverCapabilities.documentHighlightProvider) {
       const highlights = await connection.documentHighlight(documentPositionParams)
-      if (highlights != null && highlights.length > 0) {
+      if (highlights.length > 0) {
         queryRange = highlights.map((h) => Convert.lsRangeToAtomRange(h.range))
       }
     }
@@ -72,10 +72,7 @@ export default class DefinitionAdapter {
    * @returns An {Array} of {Location}s or {null} if the locationResult was null.
    */
   public static normalizeLocations(locationResult: Location | Location[]): Location[] | null {
-    if (locationResult == null) {
-      return null
-    }
-    return (Array.isArray(locationResult) ? locationResult : [locationResult]).filter((d) => d.range.start != null)
+    return (Array.isArray(locationResult) ? locationResult : [locationResult]).filter((d) => d.range.start != null) // TODO d.range.start is never null!
   }
 
   /**
